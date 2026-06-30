@@ -1,0 +1,9 @@
+FRONTEND/.env
+BACKEND/.env
+DASHBOARD/.env
+
+*.log
+
+node_modules
+dist
+.env

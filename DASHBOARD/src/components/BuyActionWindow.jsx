@@ -1,0 +1,81 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import GeneralContext from "./GeneralContext";
+import "./BuyActionWindow.css";
+import { Helmet } from 'react-helmet';
+
+const BuyActionWindow = ({ uid }) => {
+  const handleCancelClick = () => {
+    GeneralContext.closeBuyWindow();
+  };
+
+const[stockQuantity, setStockQuantity]  = useState(1);
+const[stockPrice, setStockPrice]  = useState(0.0);
+
+  const handleBuyClick = () =>{
+    try{
+    let res = await axios.post("http://localhost:8000/dashboard/orders/newOrders", 
+    {
+    name: uid,
+    qty: stockQuantity,
+    percent: stockPrice,
+    mode: "BUY",
+    },
+    {
+      withCredentials: true // important for cookies
+    });
+    console.log(res);
+    GeneralContext.closeBuyWindow();
+  } catch (err) {
+    console.log(err);
+  }
+
+  };
+  return (
+    <>
+    <Helmet><title>Watchlist | Buy Stock</title></Helmet>
+    <div className="container" id="buy-window" draggable="true">
+      <div className="regular-order">
+        <div className="inputs">
+          <fieldset>
+            <legend>Qty.</legend>
+            <input
+              type="number"
+              name="qty"
+              id="qty"
+              onChange={(e) => setStockQuantity(e.target.value)}
+              value={stockQuantity}
+            />
+          </fieldset>
+          <fieldset>
+            <legend>Price</legend>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              step="0.05"
+              onChange={(e) => setStockPrice(e.target.value)}
+              value={stockPrice}
+            />
+          </fieldset>
+        </div>
+      </div>
+
+      <div className="buttons">
+        <span>Margin required ₹140.65</span>
+        <div>
+          <Link to="" className="btn btn-blue" onClick={handleBuyClick}>
+            Buy
+          </Link>
+          <Link to="" className="btn btn-grey" onClick={handleCancelClick}>
+            Cancel
+          </Link>
+        </div>
+      </div>
+    </div>
+    </>
+  );
+};
+
+export default BuyActionWindow;
