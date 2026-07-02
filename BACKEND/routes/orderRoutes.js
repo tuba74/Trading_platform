@@ -5,6 +5,6 @@ const catchError = require("../services/catchError.js");
 const {authMiddleware} = require("../middlewares/authMiddleware");
 
 router.route("/allOrders", ).get(authMiddleware,  catchError(ordersController.allOrders))
-router.route("/newOrders", ).post( catchError(ordersController.newOrders))
+router.route("/newOrders", ).post(authMiddleware, catchError(ordersController.newOrders))
 
 module.exports =  router;

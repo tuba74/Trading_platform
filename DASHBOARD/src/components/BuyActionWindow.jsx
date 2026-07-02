@@ -4,18 +4,20 @@ import axios from "axios";
 import GeneralContext from "./GeneralContext";
 import "./BuyActionWindow.css";
 import { Helmet } from 'react-helmet';
+import { useContext } from "react";
 
 const BuyActionWindow = ({ uid }) => {
-  const handleCancelClick = () => {
-    GeneralContext.closeBuyWindow();
-  };
 
 const[stockQuantity, setStockQuantity]  = useState(1);
 const[stockPrice, setStockPrice]  = useState(0.0);
+const{closeBuyWindow} = useContext(GeneralContext);
 
-  const handleBuyClick = () =>{
+  const handleCancelClick = () => {
+    closeBuyWindow();
+  };
+  const handleBuyClick = async() =>{
     try{
-    let res = await axios.post("http://localhost:8000/dashboard/orders/newOrders", 
+    await axios.post("http://localhost:8000/dashboard/orders/newOrders", 
     {
     name: uid,
     qty: stockQuantity,
@@ -25,8 +27,8 @@ const[stockPrice, setStockPrice]  = useState(0.0);
     {
       withCredentials: true // important for cookies
     });
-    console.log(res);
-    GeneralContext.closeBuyWindow();
+
+    closeBuyWindow();
   } catch (err) {
     console.log(err);
   }

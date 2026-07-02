@@ -102,7 +102,7 @@ function RegisterForm() {
                 <label htmlFor="inputPassword6" className="col-form-label">Contact</label>
                 </div>
                 <div className="col-6">
-                <input type="number" id="inputPassword6" className="form-control"   name="contact"onChange={handleChange} value={formData.contact} pattern="[0-9]{10}" maxLength={10}/>
+                <input type="tel" pattern="[0-9]{10}" id="inputPassword6" className="form-control"   name="contact"onChange={handleChange} value={formData.contact} pattern="[0-9]{10}" maxLength={10}/>
 
                 </div>
                 <div className="col-6">

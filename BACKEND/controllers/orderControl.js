@@ -6,8 +6,6 @@ module.exports.allOrders =  async(req, res) =>{
     res.json(allOrders);
 };
 module.exports.newOrders = async(req, res) =>{
-//   try{
-    console.log(req.body);
     let newOrder = new OrdersModel({
         name: req.body.name,
         qty: req.body.qty,
@@ -16,8 +14,4 @@ module.exports.newOrders = async(req, res) =>{
     });
     await newOrder.save();
     res.json({message:"Order saved"});
-//   } catch (err) {
-//     // Handle errors gracefully
-//     res.status(500).json({ error: err.message });
-//   }
 };

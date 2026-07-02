@@ -33,7 +33,8 @@ function LoginForm() {
             setPopUp(true);
             setPopUpMsg(true);
             setTimeout(() => {
-                window.location.href = "http://localhost:5173";
+                // window.location.href = "http://localhost:5173";
+                window.open("http://localhost:5173", "_blank");
             }, 4000);
             
         }
