@@ -1,4 +1,4 @@
-const express = require("Express");
+const express = require("express");
 const router  = express.Router();
 const ordersController = require("../controllers/orderControl.js");
 const catchError = require("../services/catchError.js");
